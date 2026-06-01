@@ -127,14 +127,23 @@ export default function ProfileSetupPage() {
                 className="min-h-32 w-full rounded-2xl border border-white/10 bg-white/10 p-4 text-white outline-none transition placeholder:text-gray-400 focus:border-purple-400 focus:bg-white/[0.14]"
               />
 
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={handleSubmit}
-                className="w-full rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 p-4 font-bold shadow-lg shadow-purple-900/30 transition hover:shadow-purple-700/40"
-              >
-                Save Profile
-              </motion.button>
+             <motion.button
+  whileHover={{
+    scale: 1.04,
+    y: -2,
+  }}
+  whileTap={{
+    scale: 0.97,
+  }}
+  onClick={handleSubmit}
+  className="group relative w-full cursor-pointer overflow-hidden rounded-2xl bg-gradient-to-r from-purple-600 via-fuchsia-600 to-blue-600 p-4 font-bold text-white shadow-xl shadow-purple-900/40 transition-all duration-300 hover:shadow-[0_0_35px_rgba(168,85,247,0.6)]"
+>
+  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition duration-700 group-hover:translate-x-full" />
+
+  <span className="relative flex items-center justify-center gap-2 text-lg">
+    ✨ Save Profile
+  </span>
+</motion.button>
             </div>
           </motion.div>
         </div>

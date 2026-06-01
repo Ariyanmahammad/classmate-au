@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function CreateDoubtPage() {
+  const router = useRouter();
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -11,24 +13,25 @@ export default function CreateDoubtPage() {
     tags: "",
   });
 
-  const handleSubmit = async () => {
-    const response = await fetch("/api/doubts/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...form,
-        tags: form.tags.split(","),
-      }),
-    });
+ const handleSubmit = async () => {
+  const response = await fetch("/api/doubts/create", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...form,
+      tags: form.tags.split(",").map((tag) => tag.trim()).filter(Boolean),
+    }),
+  });
 
-    const data = await response.json();
+  const data = await response.json();
 
-    if (data.success) {
-      alert("Doubt Posted Successfully");
-    }
-  };
+  if (data.success) {
+    alert("Doubt Posted Successfully");
+    router.push("/");
+  }
+};
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#07021a] px-6 py-20 text-white">
