@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   BookOpen,
   Brain,
@@ -17,36 +18,42 @@ const features = [
     description:
       "Students can teach topics they know and strengthen their own concepts.",
     icon: GraduationCap,
+    href: "/dashboard",
   },
   {
     title: "Ask Your Doubts",
     description:
       "Post academic doubts and get answers from classmates and teachers.",
     icon: MessageCircleQuestion,
+    href: "/doubts",
   },
   {
     title: "Notes & PYQs",
     description:
       "Access organized notes, PDFs, previous year questions, and study materials.",
     icon: BookOpen,
+    href: "/notes",
   },
   {
     title: "Share Your Skill",
     description:
       "Showcase your skills like coding, design, speaking, writing, or teaching.",
     icon: Lightbulb,
+    href: "/profile",
   },
   {
     title: "Connect Together",
     description:
       "Connect with classmates, seniors, juniors, and teachers in one platform.",
     icon: Handshake,
+    href: "/dashboard",
   },
   {
     title: "Grow Smarter",
     description:
       "Track top contributors, best performers, and active learners.",
     icon: Brain,
+    href: "/dashboard",
   },
 ];
 
@@ -56,10 +63,8 @@ export default function FeaturesSection() {
       id="features"
       className="relative overflow-hidden bg-[#07021a] px-6 py-28 text-white"
     >
-      {/* Background glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(168,85,247,0.25),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(37,99,235,0.22),transparent_35%)]" />
 
-      {/* Floating blobs */}
       <motion.div
         animate={{ y: [0, -30, 0], x: [0, 20, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -72,7 +77,6 @@ export default function FeaturesSection() {
         className="absolute bottom-20 right-10 h-80 w-80 rounded-full bg-blue-600/20 blur-3xl"
       />
 
-      {/* Floating small icons */}
       <motion.div
         animate={{ y: [0, -18, 0], rotate: [0, 12, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -125,61 +129,61 @@ export default function FeaturesSection() {
             const Icon = feature.icon;
 
             return (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{
-                  duration: 0.65,
-                  delay: index * 0.08,
-                  ease: "easeOut",
-                }}
-                viewport={{ once: true }}
-                whileHover={{ y: -12, scale: 1.03 }}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.07] p-7 shadow-2xl shadow-purple-950/20 backdrop-blur-xl transition hover:border-purple-400/50"
-              >
-                {/* card shine */}
-                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition duration-700 group-hover:translate-x-full" />
-
-                {/* corner glow */}
-                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-purple-500/20 blur-2xl transition group-hover:bg-blue-500/25" />
-
+              <Link key={feature.title} href={feature.href}>
                 <motion.div
-                  animate={{ y: [0, -7, 0] }}
+                  initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{
-                    duration: 3 + index * 0.3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
+                    duration: 0.65,
+                    delay: index * 0.08,
+                    ease: "easeOut",
                   }}
-                  className="relative mb-7 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600 via-fuchsia-600 to-blue-600 shadow-lg shadow-purple-700/30"
+                  viewport={{ once: true }}
+                  whileHover={{ y: -12, scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="group relative h-full cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-white/[0.07] p-7 shadow-2xl shadow-purple-950/20 backdrop-blur-xl transition hover:border-purple-400/50"
                 >
-                  <Icon className="h-8 w-8 text-white" />
-                </motion.div>
+                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition duration-700 group-hover:translate-x-full" />
 
-                <h3 className="relative text-2xl font-bold text-white">
-                  {feature.title}
-                </h3>
+                  <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-purple-500/20 blur-2xl transition group-hover:bg-blue-500/25" />
 
-                <p className="relative mt-4 min-h-[84px] leading-7 text-gray-300">
-                  {feature.description}
-                </p>
-
-                <div className="relative mt-6 flex items-center justify-between">
-                  <div className="h-px flex-1 bg-gradient-to-r from-purple-400/60 via-white/20 to-transparent" />
-
-                  <motion.span
-                    animate={{ x: [0, 6, 0] }}
+                  <motion.div
+                    animate={{ y: [0, -7, 0] }}
                     transition={{
-                      duration: 1.8,
+                      duration: 3 + index * 0.3,
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
-                    className="ml-4 text-sm font-semibold text-purple-300 opacity-0 transition group-hover:opacity-100"
+                    className="relative mb-7 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600 via-fuchsia-600 to-blue-600 shadow-lg shadow-purple-700/30"
                   >
-                    Explore →
-                  </motion.span>
-                </div>
-              </motion.div>
+                    <Icon className="h-8 w-8 text-white" />
+                  </motion.div>
+
+                  <h3 className="relative text-2xl font-bold text-white">
+                    {feature.title}
+                  </h3>
+
+                  <p className="relative mt-4 min-h-[84px] leading-7 text-gray-300">
+                    {feature.description}
+                  </p>
+
+                  <div className="relative mt-6 flex items-center justify-between">
+                    <div className="h-px flex-1 bg-gradient-to-r from-purple-400/60 via-white/20 to-transparent" />
+
+                    <motion.span
+                      animate={{ x: [0, 6, 0] }}
+                      transition={{
+                        duration: 1.8,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="ml-4 text-sm font-semibold text-purple-300 opacity-0 transition group-hover:opacity-100"
+                    >
+                      Explore →
+                    </motion.span>
+                  </div>
+                </motion.div>
+              </Link>
             );
           })}
         </div>
