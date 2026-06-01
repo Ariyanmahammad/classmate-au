@@ -11,6 +11,7 @@ import {
   Video,
 } from "lucide-react";
 import Navbar from "../shared/Navbar";
+import Link from "next/link";
 
 const floatingCards = [
   { title: "Ask Doubts", icon: MessageCircleQuestion },
@@ -71,9 +72,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.1 }}
             className="mt-6 max-w-2xl text-lg leading-8 text-gray-300"
-          >
-            
-          </motion.p>
+          ></motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 35 }}
@@ -81,14 +80,20 @@ export default function HeroSection() {
             transition={{ duration: 1.3 }}
             className="mt-10 flex flex-col gap-4 pb-24 sm:flex-row xl:pb-0"
           >
-            <button className="group flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 px-8 py-4 font-semibold shadow-lg shadow-purple-900/40 transition hover:scale-105">
+            <Link
+              href="/login"
+              className="group flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 px-8 py-4 font-semibold shadow-lg shadow-purple-900/40 transition hover:scale-105"
+            >
               Start Learning
-              <ArrowRight size={18} className="transition group-hover:translate-x-1" />
-            </button>
+              <ArrowRight size={18} />
+            </Link>
 
-            <button className="rounded-full border border-white/20 bg-white/10 px-8 py-4 font-semibold backdrop-blur-md transition hover:bg-white/15">
+            <Link
+              href="/dashboard"
+              className="rounded-full border border-white/20 bg-white/10 px-8 py-4 font-semibold backdrop-blur-md transition hover:bg-white/15"
+            >
               Explore Platform
-            </button>
+            </Link>
           </motion.div>
         </div>
 
@@ -161,7 +166,7 @@ export default function HeroSection() {
                   </span>
                 </div>
               );
-            }
+            },
           )}
         </motion.div>
       </div>

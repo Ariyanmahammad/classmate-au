@@ -39,11 +39,11 @@ const UserSchema = new Schema(
       default: "",
     },
 
-    skills: [
-      {
-        type: String,
-      },
-    ],
+   subjectsCanHelp: [
+  {
+    type: String,
+  },
+],
 
     isProfileComplete: {
       type: Boolean,
