@@ -5,6 +5,10 @@ import StatsSection from "@/components/home/StatsSection";
 import ResourcesSection from "@/components/home/ResourcesSection";
 import SkillSection from "@/components/home/SkillSection";
 import PerformersSection from "@/components/home/PerformersSection";
+import CommunitySection from "@/components/home/CommunitySection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
+import CTASection from "@/components/home/CTASection";
+import Footer from "@/components/shared/Footer";
 
 export default function Home() {
   return (
@@ -16,6 +20,10 @@ export default function Home() {
       <ResourcesSection />
       <SkillSection />
       <PerformersSection />
+      <CommunitySection />
+      <TestimonialsSection />
+      <CTASection />
+      <Footer />
     </main>
   );
 }
