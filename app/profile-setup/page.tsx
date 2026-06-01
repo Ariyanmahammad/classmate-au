@@ -109,7 +109,7 @@ export default function ProfileSetupPage() {
               />
 
               <InputBox
-                placeholder="Semester (4)"
+                placeholder="Write Only Sem No. for Ex: 7"
                 value={semester}
                 onChange={setSemester}
               />
@@ -121,7 +121,7 @@ export default function ProfileSetupPage() {
               />
 
               <textarea
-                placeholder="Bio"
+                placeholder="Bio - mandatory to fill"
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 className="min-h-32 w-full rounded-2xl border border-white/10 bg-white/10 p-4 text-white outline-none transition placeholder:text-gray-400 focus:border-purple-400 focus:bg-white/[0.14]"
