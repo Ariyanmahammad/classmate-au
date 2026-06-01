@@ -16,6 +16,7 @@ export default function ProfileSetupPage() {
   const [bio, setBio] = useState("");
 
   const handleSubmit = async () => {
+  try {
     const response = await fetch("/api/profile/update", {
       method: "POST",
       headers: {
@@ -25,19 +26,27 @@ export default function ProfileSetupPage() {
         department,
         semester,
         bio,
-        skills: skills.split(",").map((s) => s.trim()),
+        skills: skills
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean),
       }),
     });
 
     const data = await response.json();
 
-    if (data.success) {
-      alert("Profile Completed Successfully");
-      router.push("/");
-      router.refresh();
+    if (!response.ok || !data.success) {
+      alert(data.message || "Profile update failed. Please login again.");
+      return;
     }
-  };
 
+    alert("Profile Completed Successfully");
+    router.push("/");
+    router.refresh();
+  } catch {
+    alert("Something went wrong. Please try again.");
+  }
+};
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#07021a] px-6 py-16 text-white">
       <div className="absolute left-10 top-10 h-72 w-72 rounded-full bg-purple-600/30 blur-3xl" />

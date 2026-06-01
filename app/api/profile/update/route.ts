@@ -2,16 +2,17 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { connectDB } from "@/lib/db";
 import User from "@/models/User";
+import { authOptions } from "@/lib/auth";
 
 export async function POST(req: Request) {
   try {
     await connectDB();
 
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
 
     if (!session?.user?.email) {
       return NextResponse.json(
-        { success: false, message: "Unauthorized" },
+        { success: false, message: "Unauthorized. Please login again." },
         { status: 401 }
       );
     }
@@ -21,13 +22,19 @@ export async function POST(req: Request) {
     const updatedUser = await User.findOneAndUpdate(
       { email: session.user.email },
       {
+        name: session.user.name,
+        email: session.user.email,
+        image: session.user.image,
         department: body.department,
-        semester: body.semester,
-        subject: body.subject,
+        semester: Number(body.semester),
         bio: body.bio,
-        profileCompleted: true,
+        subjectsCanHelp: body.skills || [],
+        isProfileComplete: true,
       },
-      { new: true }
+      {
+        new: true,
+        upsert: true,
+      }
     );
 
     return NextResponse.json({
@@ -38,7 +45,10 @@ export async function POST(req: Request) {
     console.log("Profile update error:", error);
 
     return NextResponse.json(
-      { success: false, message: "Profile update failed" },
+      {
+        success: false,
+        message: "Profile update failed",
+      },
       { status: 500 }
     );
   }
