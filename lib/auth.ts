@@ -43,24 +43,28 @@ export const authOptions: AuthOptions = {
       const dbUser = await User.findOne({ email: token.email });
 
       if (dbUser) {
-        token.id = dbUser._id.toString();
-        token.role = dbUser.role;
-        token.department = dbUser.department;
-        token.semester = dbUser.semester;
-        token.isProfileComplete = dbUser.isProfileComplete;
-      }
+  token.id = dbUser._id.toString();
+  token.role = dbUser.role;
+  token.department = dbUser.department;
+  token.semester = dbUser.semester;
+  token.bio = dbUser.bio;
+  token.subjectsCanHelp = dbUser.subjectsCanHelp;
+  token.isProfileComplete = dbUser.isProfileComplete;
+}
 
       return token;
     },
 
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id as string;
-        session.user.role = token.role as "student" | "admin";
-        session.user.department = token.department as string;
-        session.user.semester = token.semester as number;
-        session.user.isProfileComplete = token.isProfileComplete as boolean;
-      }
+  session.user.id = token.id as string;
+  session.user.role = token.role as "student" | "admin";
+  session.user.department = token.department as string;
+  session.user.semester = token.semester as number;
+  session.user.bio = token.bio as string;
+  session.user.subjectsCanHelp = token.subjectsCanHelp as string[];
+  session.user.isProfileComplete = token.isProfileComplete as boolean;
+}
 
       return session;
     },

@@ -10,6 +10,8 @@ declare module "next-auth" {
       role: "student" | "admin";
       department?: string;
       semester?: number;
+      bio?: string;
+      subjectsCanHelp?: string[];
       isProfileComplete?: boolean;
     };
   }

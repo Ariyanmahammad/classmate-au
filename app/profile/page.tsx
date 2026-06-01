@@ -93,17 +93,21 @@ export default function ProfilePage() {
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
-          <ProfileCard
-            title="About Me"
-            icon={<UserRound />}
-            content="Your profile is ready. You can update your bio and academic details from profile setup."
-          />
+         <ProfileCard
+  title="About Me"
+  icon={<UserRound />}
+  content={session.user?.bio || "No bio added yet."}
+/>
 
-          <ProfileCard
-            title="Can Help With"
-            icon={<Sparkles />}
-            content="Subjects and skills will appear here after future profile improvements."
-          />
+<ProfileCard
+  title="Can Help With"
+  icon={<Sparkles />}
+  content={
+    session.user?.subjectsCanHelp?.length
+      ? session.user.subjectsCanHelp.join(", ")
+      : "No skills added yet."
+  }
+/>
         </div>
       </motion.div>
     </main>
